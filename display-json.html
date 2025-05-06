@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display JSON</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>JSON Data</h1>
+    <pre id="json-display">Loading...</pre>
+
+    <script>
+        // URL of the JSON file
+        const jsonUrl = "https://raw.githubusercontent.com/colleenpridemore/Emojicode_Hello-_Universe/main/pi-user-history.json";
+
+        // Fetch the JSON file and display its contents
+        fetch(jsonUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Display the JSON content in a prettified format
+                document.getElementById('json-display').textContent = JSON.stringify(data, null, 4);
+            })
+            .catch(error => {
+                document.getElementById('json-display').textContent = 'Error fetching JSON: ' + error.message;
+            });
+    </script>
+</body>
+</html>
